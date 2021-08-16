@@ -47,6 +47,11 @@ public:
   {
     return screen_;
   }
+
+  void flush() const
+  {
+    xcb_flush(xcb_connection_);
+  }
 };
 
 } // namespace xcb

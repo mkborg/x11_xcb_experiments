@@ -72,6 +72,11 @@ public:
 
     return oss.str();
   }
+
+  xcb_screen_t const * operator ->() const
+  {
+    return xcb_screen_;
+  }
 };
 
 } // namespace xcb
