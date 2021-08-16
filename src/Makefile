@@ -3,7 +3,20 @@ default: all
 
 CFLAGS += -O2 -Wall -Wextra -MMD
 CFLAGS += -I ../utils
+
+
+SUBDIRS += utils
+#SUBDIRS += cxx
+
+include Makefile.SUBDIRS
+
+#xcb_screen_test: .subdir-cxx-all
+xcb_screen_test: ${SUBDIRS-ALL}
+LIBS += -L utils -lutils
+#LIBS += -L cxx -lutils_cxx
+
 LIBS += -lxcb
+
 
 all: xcb_screen_test
 xcb_screen_test: xcb_screen_test.cpp
