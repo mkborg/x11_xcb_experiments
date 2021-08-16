@@ -1,5 +1,7 @@
 #pragma once
 
+#include "exceptions/runtime_error.h"
+
 #include <xcb/xcb.h>
 
 /*
@@ -36,6 +38,9 @@ public:
     : xcb_connection_(xcb_connect(display_name, &screen_))
   {
     // FIXME: 'assert(xcb_connection_)'
+    if (xcb_connection_has_error(xcb_connection_)) {
+      throw RUNTIME_ERROR_PRINTF("%s() failure", "xcb_connect");
+    }
   }
 
   operator xcb_connection_t * ()

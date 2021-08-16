@@ -2,6 +2,7 @@
 default: all
 
 CFLAGS += -O2 -Wall -Wextra -MMD
+CFLAGS += -I ../utils
 LIBS += -lxcb
 
 all: xcb_screen_test
