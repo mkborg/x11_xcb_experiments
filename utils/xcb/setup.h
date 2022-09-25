@@ -12,6 +12,11 @@ private:
   const xcb_setup_t * xcb_setup_;
 
 public:
+  operator const xcb_setup_t * ()
+  {
+    return xcb_setup_;
+  }
+
   ~Setup()
   {
 /*
@@ -33,11 +38,6 @@ public:
     : xcb_setup_(xcb_get_setup(static_cast<xcb_connection_t *>(xcb_connection)))
   {
     // FIXME: 'assert(xcb_setup_)'
-  }
-
-  operator const xcb_setup_t * ()
-  {
-    return xcb_setup_;
   }
 };
 

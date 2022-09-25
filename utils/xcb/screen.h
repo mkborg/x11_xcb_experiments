@@ -37,6 +37,11 @@ private:
   const xcb_screen_t * xcb_screen_;
 
 public:
+  xcb_screen_t const * operator ->() const
+  {
+    return xcb_screen_;
+  }
+
   ~Screen()
   {
 /*
@@ -71,11 +76,6 @@ public:
     oss << " height_in_pixels=" << xcb_screen_->height_in_pixels;
 
     return oss.str();
-  }
-
-  xcb_screen_t const * operator ->() const
-  {
-    return xcb_screen_;
   }
 };
 

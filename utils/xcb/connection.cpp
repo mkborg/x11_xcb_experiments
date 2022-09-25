@@ -39,4 +39,18 @@ Connection::Connection(const char * display_name)
   }
 }
 
+uint32_t Connection::generate_id() const
+{
+#if 0
+  const uint32_t id = xcb_generate_id(xcb_connection_);
+#else
+  const auto id = xcb_generate_id(xcb_connection_);
+#endif
+  //if (static_cast<typeof(id)>(-1) == id) {
+  if (-1 == int(id)) {
+    throw RUNTIME_ERROR_PRINTF("%s() failure", "xcb_generate_id");
+  }
+  return id;
+}
+
 } // namespace xcb

@@ -18,16 +18,16 @@ private:
   int screen_;
 
 public:
-  ~Connection();
-
-  Connection(const char * display_name = nullptr);
-
   operator xcb_connection_t * ()
   {
     return xcb_connection_;
   }
 
-  int screen()
+  ~Connection();
+
+  Connection(const char * display_name = nullptr);
+
+  int screen() const
   {
     return screen_;
   }
@@ -37,9 +37,11 @@ public:
     xcb_flush(xcb_connection_);
   }
 
-  xcb_window_t generate_id() const
+  uint32_t generate_id() const;
+
+  int fd() const
   {
-    return xcb_generate_id(xcb_connection_);
+    return xcb_get_file_descriptor(xcb_connection_);
   }
 };
 
