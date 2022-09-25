@@ -1,7 +1,7 @@
 #pragma once
 
-#include "xcb_connection.h"
-#include "xcb_screen.h"
+#include "xcb/connection.h"
+#include "xcb/screen.h"
 
 #include <xcb/xcb.h>
 
@@ -44,7 +44,8 @@ public:
       xcb::Connection& xcb_connection,
       xcb::Screen& xcb_screen)
     : xcb_connection_(xcb_connection)
-    , window_id_(xcb_generate_id(xcb_connection_))
+//  , window_id_(xcb_generate_id(xcb_connection_))
+    , window_id_(xcb_connection_.generate_id())
   {
     xcb_create_window(
         xcb_connection_,		// Connection
@@ -64,6 +65,25 @@ public:
   xcb_void_cookie_t show() const
   {
     return xcb_map_window(xcb_connection_, window_id_);
+  }
+
+  xcb_void_cookie_t hide() const
+  {
+    return xcb_unmap_window(xcb_connection_, window_id_);
+  }
+
+  // Move the window on the top of the stack
+  xcb_void_cookie_t raise() const
+  {
+    static const uint32_t values[] = { XCB_STACK_MODE_ABOVE };
+    return xcb_configure_window(xcb_connection_, window_id_, XCB_CONFIG_WINDOW_STACK_MODE, values);
+  }
+
+  // Move the window on the bottom of the stack
+  xcb_void_cookie_t sink() const
+  {
+    static const uint32_t values[] = { XCB_STACK_MODE_BELOW };
+    return xcb_configure_window(xcb_connection_, window_id_, XCB_CONFIG_WINDOW_STACK_MODE, values);
   }
 };
 

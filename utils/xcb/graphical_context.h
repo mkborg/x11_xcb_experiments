@@ -1,7 +1,7 @@
 #pragma once
 
-#include "xcb_connection.h"
-#include "xcb_screen.h"
+#include "xcb/connection.h"
+#include "xcb/screen.h"
 
 #include <xcb/xcb.h>
 

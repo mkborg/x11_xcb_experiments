@@ -20,15 +20,18 @@ public:
 */
   }
 
+  // Note: Looks like 'xcb_setup_roots_iterator' returns pointer into
+  // 'xcb_connection' internals.
+
   Iterator(const xcb_setup_t * xcb_setup)
     : xcb_screen_iterator_(xcb_setup_roots_iterator(xcb_setup))
   {
     // FIXME: 'assert(xcb_screen_iterator_)'
   }
 
-  operator bool()
+  operator bool() const
   {
-    return xcb_screen_iterator_.data;
+    return xcb_screen_iterator_.rem;
   }
 
   void operator ++()

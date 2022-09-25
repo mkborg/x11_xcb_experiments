@@ -1,6 +1,6 @@
 #pragma once
 
-#include "xcb_screen_iterator.h"
+#include "xcb/screen_iterator.h"
 
 #include <xcb/xcb.h>
 
@@ -63,7 +63,7 @@ public:
   inline uint16_t width_in_millimeters() const { return xcb_screen_->width_in_millimeters; }
   inline uint16_t height_in_millimeters() const { return xcb_screen_->height_in_millimeters; }
 
-  std::string toString()
+  std::string toString() const
   {
     std::ostringstream oss;
 

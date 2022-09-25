@@ -1,6 +1,6 @@
 #pragma once
 
-#include "xcb_connection.h"
+#include "xcb/connection.h"
 
 #include <xcb/xcb.h>
 
@@ -20,6 +20,8 @@ public:
     }
 */
   }
+
+  // Note: 'xcb_get_setup' returns pointer into 'xcb_connection' internals.
 
   Setup(xcb_connection_t * xcb_connection)
     : xcb_setup_(xcb_get_setup(xcb_connection))
